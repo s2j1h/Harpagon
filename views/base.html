@@ -1,0 +1,54 @@
+$def with (content)
+$# Base view definition.
+$#
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta name="author" content="J.Raigneau" />
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <link rel="stylesheet" href="/static/style.css" type="text/css" />
+    <link rel="icon" type="image/ico" href="/static/favicon.ico" />
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
+    <style type="text/css" media="screen"> 
+        @import "/static/uni-form/css/uni-form.css";
+          .uniForm fieldset{ margin: 0 0 1.5em 0; }
+          .uniForm .inlineLabel em{ left: 10px !important; }
+            
+          .uniForm .inlineLabels .ctrlHolder .multiField.phoneNum .blockLabel{ width: auto; }
+          .uniForm .textInput{border: 2px solid #FF9900;}
+            .uniForm .inlineLabels .ctrlHolder .multiField .blockLabel #phone_area.textInput{ width: 4em; }
+    </style>
+	<title>Harpagon</title>
+</head>
+<body>
+	<div id="page" align="center">
+		<div id="header" align="center">
+			<div class="titletext" id="logo">
+				<div class="logotext" style="margin-top:40px">Ha<span class="orangelogotext">rpag</span>on</div> 
+			</div>
+			<div id="pagetitle">
+				<div id="title" class="titletext" align="right">Soyons malins, soyons e-avare!</div>
+			</div>
+		</div>
+		<div id="content" align="center">
+			<div id="menu" align="right">
+				<div align="right" style="width:189px; height:8px;"><img src="/static/mnu_topshadow.gif" width="189" height="8" alt="mnutopshadow" /></div>
+				<div id="linksmenu" align="center">
+					<a href="/" title="Accueil">Tableau de bord</a>
+					<a href="/transaction" title="Lister mouvements">Lister les mouvements</a>
+					<a href="/upload" title="Ajouter mouvements">Ajouter des mouvements</a>
+					<a href="/admin" title="Admin">Gérer les catégories</a>
+				</div>
+				<div align="right" style="width:189px; height:8px;"><img src="/static/mnu_bottomshadow.gif" width="189" height="8" alt="mnubottomshadow" /></div>
+			</div>
+            <div id="contenttext">
+            $:content
+		</div>
+		<div id="footer" class="smallgraytext" align="center">
+			(C) 2009-2010 J.Raigneau<br />
+			Harpagon est un produit fièrement élaboré chez <a href="http://labs.zeneffy.fr" title="Zeneffy::Labs">Zeneffy::Labs</a><br />
+		</div>
+	</div>
+</body>
+</html>

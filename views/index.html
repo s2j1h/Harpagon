@@ -1,0 +1,58 @@
+$def with (graphBar,statsCategoriesIncomesAll,statsIncomesAll,statsCategoriesAll,statsOutcomesAll,responseTime)
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
+<script type="text/javascript">
+		$$(function () {
+			var tabContainers = $$('div.tabs > div');
+			tabContainers.hide().filter(':first').show();
+			
+			$$('div.tabs ul.tabNavigation a').click(function () {
+				tabContainers.hide();
+				tabContainers.filter(this.hash).show();
+				$$('div.tabs ul.tabNavigation a').removeClass('selected');
+				$$(this).addClass('selected');
+				return false;
+			}).filter(':first').click();
+		});
+    </script>
+
+<div class="bodytext" style="padding:12px;" align="justify">
+        <div class="panel" align="justify">
+				<span class="orangetitle">Dashboard</span>
+                    <div class="tabs"> 
+                        <ul class="tabNavigation"> 
+                            <li><a href="#first">Synthèse Mensuelle</a></li> 
+                            <li><a href="#second">Revenus</a></li> 
+                            <li><a href="#third">Stats globales</a></li> 
+                        </ul> 
+                        <div id="first"> 
+                            <h2>Statut Mensuel</h2> 
+                            <p align="center">
+                                <img src="http://chart.apis.google.com/chart?$graphBar"/>
+                            </p> 
+                        </div> 
+                        <div id="second"> 
+                            <h2>Revenus</h2> 
+                            <p align="center">
+                                <img src="http://chart.apis.google.com/chart?$statsCategoriesIncomesAll"/>
+                            </p>
+                            <p align="center">
+                                <img src="http://chart.apis.google.com/chart?$statsIncomesAll"/>
+                                <p/>
+                
+                        </div> 
+                        <div id="third"> 
+                            <h2>Synthèse Globale</h2> 
+                            <p align="center">
+                                <img src="http://chart.apis.google.com/chart?$statsCategoriesAll"/>
+                             </p>
+                             <p align="center">
+                                <img src="http://chart.apis.google.com/chart?$statsOutcomesAll"/>
+                            </p>
+                        </div> 
+                    </div> 
+    
+
+</div>
+<p><center>$responseTime</center></p>
+</div>

@@ -1,0 +1,66 @@
+$def with (category,flash)
+  <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/themes/ui-lightness/jquery-ui.css" type="text/css" rel="Stylesheet" />
+  <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/jquery-ui.min.js"></script>
+
+
+<script type="text/javascript">
+    $$(document).ready(function()  {
+        $$("#delete").click(function(e){
+             event.preventDefault()
+             $$("#_method").attr({ value: "DELETE" });
+             $$("#confirmation").dialog('open');
+        });         
+        $$("#confirmation").dialog({
+            autoOpen: false,
+            modal: true,
+            closeOnEscape: false,
+            resizable: false,
+            open: function(event, ui) { $$(".ui-dialog-titlebar-close").hide();},
+            buttons : {
+                "Oui" : function() {              
+                    $$(this).dialog("close");
+                    $$("#myForm").submit();
+                },
+                "Non" : function() {
+                $$(this).dialog("close");
+                $$("#_method").attr({ value: "PUT" });
+
+                }
+           }
+        });
+    });
+</script>
+
+<div id="confirmation" title="Confimation"><center>Confirmez vous la suppression de la catégorie $category["category"] ?</center></div>
+
+<div class="bodytext" style="padding:12px;" align="justify">
+    <div class="panel" align="justify">
+    <span class="orangetitle">Modifier la catégorie</span>
+                    $if "erreur" in flash:
+                        <div id="flash" class="erreur">
+                            <p>$flash["erreur"]</p>
+                            <script>$$("#flash").fadeOut(5000);</script>
+                        </div>
+                    $if "notice" in flash:
+                        <div id="flash" class="notice">
+                            <p>$flash["notice"]</p>
+                            <script>$$("#flash").fadeOut(5000);</script>
+                        </div>
+                    <form method="POST" enctype="multipart/form-data" action="/category/$category["id"]/put" class="uniForm" id="myForm">
+                        <fieldset class="inlineLabels">
+                        <div class="ctrlHolder">
+                            <label for="category" class="blockLabel">Catégorie:</label> <input type="text" name="category" value="$category["category"]" class="textInput" size="30" maxlength="30" />
+                        </div>
+                        <input type="hidden" name="_method" id="_method" value="PUT">
+                        <div class="buttonHolder">
+                            <button type="submit" class="submitButton" name="update" id="update">Modifier</button>
+                            $if category["id"] != 1:
+                                <button type="submit" class="submitButton" name="delete" id="delete">Supprimer</button>
+                        </div>    
+                    
+                    
+                    </fieldset>
+
+                    </form>
+    </div>
+</div>

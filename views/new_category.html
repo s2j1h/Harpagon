@@ -1,0 +1,49 @@
+$def with (flash)
+
+<script type="text/javascript" src="/static/jquery.validate.js"></script>
+
+<script type="text/javascript">
+    $$(document).ready(function(){
+            $$("#myform").validate({
+            rules: {
+                category: "required"
+                },
+            messages: {
+                category: "Merci de donner le nom de la catégorie"
+                },
+            errorLabelContainer: "#messageBox",
+            errorClass: "erreur"
+            });         
+    });
+</script>
+
+<div class="bodytext" style="padding:12px;" align="justify">
+    <div class="panel" align="justify">
+    <span class="orangetitle">Créer une nouvelle catégorie</span>
+                    $if "erreur" in flash:
+                        <div id="flash" class="erreur">
+                            <p>$flash["erreur"]</p>
+                            <script>$$("#flash").fadeOut(5000);</script>
+                        </div>
+                    $if "notice" in flash:
+                        <div id="flash" class="notice">
+                            <p>$flash["notice"]</p>
+                            <script>$$("#flash").fadeOut(5000);</script>
+                        </div>
+                    <form method="POST" enctype="multipart/form-data" action="/category/new" class="uniForm" id="myform" name="myform">
+                        <div><p id="messageBox" style="font-size: 10px;	text-align: center;	color: #000;margin: 0;"></p></div> 
+                        <fieldset class="inlineLabels">
+                        <div class="ctrlHolder">
+                            <label for="category" class="blockLabel">Catégorie:</label> <input type="text" id="category" name="category" value="" class="textInput" size="30" maxlength="30" />
+                        </div>
+                        <input type="hidden" name="_method" id="_method" value="POST">
+                        <div class="buttonHolder">
+                            <button type="submit" class="submitButton" name="update" id="update">Créer</button>
+                        </div>    
+                    
+                    
+                    </fieldset>
+
+                    </form>
+    </div>
+</div>

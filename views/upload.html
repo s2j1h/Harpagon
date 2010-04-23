@@ -1,0 +1,48 @@
+$def with (flash)
+  <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/themes/ui-lightness/jquery-ui.css" type="text/css" rel="Stylesheet" />
+  <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/jquery-ui.min.js"></script>
+
+ <script type="text/javascript">
+     $$(document).ready(function(){
+             $$("#spinnerA").click(function(event){
+                 $$("#spinner").dialog('open');
+                 });
+             $$("#spinner").dialog({
+                autoOpen: false,
+                modal: true,
+                closeOnEscape: false,
+                resizable: false,
+                open: function(event, ui) { $$(".ui-dialog-titlebar-close").hide();}
+            });
+     });
+ </script>
+ 
+ <div id="spinner" title="Merci de patienter..."><center><IMG SRC="/static/spinner.gif"/></center></div>
+ 
+<div class="bodytext" style="padding:12px;" align="justify">
+			<div class="panel" align="justify">
+				<span class="orangetitle">Ajouter des mouvements</span>
+                    $if "erreur" in flash:
+                        <div id="flash" class="erreur">
+                            <p>$flash["erreur"]</p>
+                            <script>$$("#flash").fadeOut(5000);</script>
+                        </div>
+                    $if "notice" in flash:
+                        <div id="flash" class="notice">
+                            <p>$flash["notice"]</p>
+                            <script>$$("#flash").fadeOut(5000);</script>
+                        </div>
+
+                    <form method="POST" enctype="multipart/form-data" action="" class="uniForm">
+                            <fieldset class="inlineLabels">
+                                 <div class="ctrlHolder">
+                                     <label for="myfile" class="blockLabel">Fichier de transactions à importer:</label> <input type="file" name="myfile"  class="fileUpload" />
+                                     <p class="formHint">Format attendu: Money - date(JJ/MM/AAAA) - séparateur décimal(.)</p> 
+                                 </div>
+                                  <div class="buttonHolder">
+                                      <button type="submit" class="submitButton" id="spinnerA">Importer</button>
+                                  </div>
+                           </fieldset>
+                       </form>
+            </div>
+</div>

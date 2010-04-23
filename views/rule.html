@@ -1,0 +1,80 @@
+$def with (rule,categories,flash)
+  <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/themes/ui-lightness/jquery-ui.css" type="text/css" rel="Stylesheet" />
+  <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/jquery-ui.min.js"></script>
+
+<script type="text/javascript">
+    $$(document).ready(function()  {
+        $$("#delete").click(function(e){
+             event.preventDefault()
+             $$("#_method").attr({ value: "DELETE" });
+             $$("#confirmation").dialog('open');
+        });         
+        $$("#confirmation").dialog({
+            autoOpen: false,
+            modal: true,
+            closeOnEscape: false,
+            resizable: false,
+            open: function(event, ui) { $$(".ui-dialog-titlebar-close").hide();},
+            buttons : {
+                "Oui" : function() {              
+                    $$(this).dialog("close");
+                    $$("#myForm").submit();
+                },
+                "Non" : function() {
+                $$(this).dialog("close");
+                $$("#_method").attr({ value: "PUT" });
+
+                }
+           }
+        });
+    });
+</script>
+
+<div id="confirmation" title="Confimation"><center>Confirmez vous la suppression de la catégorie $rule["searchString"] ?</center></div>
+
+<div class="bodytext" style="padding:12px;" align="justify">
+    <div class="panel" align="justify">
+    <span class="orangetitle">Modifier la règle</span>
+                    $if "erreur" in flash:
+                        <div id="flash" class="erreur">
+                            <p>$flash["erreur"]</p>
+                            <script>$$("#flash").fadeOut(5000);</script>
+                        </div>
+                    $if "notice" in flash:
+                        <div id="flash" class="notice">
+                            <p>$flash["notice"]</p>
+                            <script>$$("#flash").fadeOut(5000);</script>
+                        </div>
+
+                    <form method="POST" enctype="multipart/form-data" action="/rule/$rule["id"]/put" class="uniForm" id="myForm">
+                        <fieldset class="inlineLabels">
+                        <div class="ctrlHolder">
+                            <label for="searchString" class="blockLabel">Chaine de caractère à rechercher:</label> <input type="text" name="searchString" value="$rule["searchString"]" class="textInput" size="30" maxlength="30" />
+                        </div>
+                        <div class="ctrlHolder">
+                            <label for="category" class="blockLabel">Catégorie à appliquer:</label>
+                            <select name="category" class="selectInput">
+                                $ categoryList = categories.items()
+                                $categoryList.sort(key=lambda x: x[1])
+                                $for categoryID,categoryItem in categoryList:
+                                    $if categoryID == rule['categoryID']:
+                                        $ text="selected='selected'"
+                                    $else:
+                                        $ text=""
+                                    <option value="$categoryID" $text>$categoryItem</option>
+
+                            </select>
+                        </div>
+
+                        <input type="hidden" name="_method" id="_method" value="PUT">
+                        <div class="buttonHolder">
+                            <button type="submit" class="submitButton" name="update" id="update">Modifier</button>
+                            <button type="submit" class="submitButton" name="delete" id="delete">Supprimer</button>
+                        </div>    
+                    
+                    
+                    </fieldset>
+
+                    </form>
+    </div>
+</div>

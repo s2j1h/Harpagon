@@ -1,0 +1,111 @@
+$def with (categories,searchStrings,flash)
+
+  <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/themes/ui-lightness/jquery-ui.css" type="text/css" rel="Stylesheet" />
+  <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/jquery-ui.min.js"></script>
+
+ <script type="text/javascript">
+     $$(document).ready(function(){
+             $$("#spinnerA").click(function(event){
+                 $$("#spinner").dialog('open');
+                 });
+             $$("#spinner").dialog({
+                autoOpen: false,
+                modal: true,
+                closeOnEscape: false,
+                resizable: false,
+                open: function(event, ui) { $$(".ui-dialog-titlebar-close").hide();}
+            });
+     });
+ </script>
+
+ <div id="spinner" title="Merci de patienter..."><center><IMG SRC="/static/spinner.gif"/></center></div>
+
+<div class="bodytext" style="padding:12px;" align="justify">
+				<span class="orangetitle">Administrer les catégories</span>
+
+<div class="section">
+
+                    $if "erreur" in flash:
+                        <div id="flash" class="erreur">
+                            <p>$flash["erreur"]</p>
+                            <script>$$("#flash").fadeOut(5000);</script>
+                        </div>
+                    $if "notice" in flash:
+                        <div id="flash" class="notice">
+                            <p>$flash["notice"]</p>
+                            <script>$$("#flash").fadeOut(5000);</script>
+                        </div>
+
+
+
+
+<div id="nsdetails">
+<table id="nstable">
+<thead>
+<tr>
+    <td nowrap="nowrap"><center>Id</center></td>
+    <td nowrap="nowrap"><center>Catégorie</center></td>
+</tr>
+</thead>
+<tbody>
+$ categoryList = categories.items()
+$categoryList.sort(key=lambda x: x[1])
+$for categoryID,categoryItem in categoryList:
+    <tr class="normal $loop.parity">
+        <td><center>$categoryID</center></td>
+        <td><center>$categories[categoryID]</center></td>
+        <td><center><A HREF="/category/$categoryID/edit">modifier</A>&nbsp;
+    </tr>
+
+
+</tbody></table>
+<span style="text-align: right;"><A HREF="/category/new">Ajouter une catégorie</A></span>
+
+
+</div>
+</div>
+
+<br/><br/><div class="section">
+
+                    $if "erreur1" in flash:
+                        <div id="flash" class="erreur">
+                            <p>$flash["erreur1"]</p>
+                            <script>$$("#flash").fadeOut(5000);</script>
+                        </div>
+                    $if "notice1" in flash:
+                        <div id="flash" class="notice">
+                            <p>$flash["notice1"]</p>
+                            <script>$$("#flash").fadeOut(5000);</script>
+                        </div>
+
+    
+<div id="nsdetails">
+<table id="nstable">
+<thead>
+    <tr>
+     <td nowrap="nowrap"><center>Id</center></td>
+    <td nowrap="nowrap"><center>Règle</center></td>
+    <td nowrap="nowrap"><center>Catégorie</center></td>
+</tr>
+</thead>
+<tbody>
+$ searchStringList = searchStrings.items()
+$searchStringList.sort(key=lambda x: x[1])
+$for searchStringID,searchString in searchStringList:
+    <tr class="normal $loop.parity">
+        <td><center>$searchStringID</center></td>
+        <td><center>$searchStrings[searchStringID]["searchString"]</center></td>
+        <td><center>$searchStrings[searchStringID]["category"]</center></td>
+      <td><center><A HREF="/rule/$searchStringID/edit">modifier</A></center></td>
+    </tr>
+
+
+</tbody></table>
+<span style="text-align: right;"><A HREF="/rule/new">Ajouter une règle</A>&nbsp;&nbsp;&nbsp;<A id="spinnerA" HREF="/rule/commit">Rejouer toutes les règles</A></span>
+
+
+</div>
+</div>
+
+</div>
+

@@ -1,0 +1,45 @@
+$def with (transactions,flash)
+
+<div class="bodytext" style="padding:12px;" align="justify">
+				<span class="orangetitle">Lister des mouvements</span>
+
+                    $if "erreur" in flash:
+                        <div id="flash" class="erreur">
+                            <p>$flash["erreur"]</p>
+                            <script>$$("#flash").fadeOut(5000);</script>
+                        </div>
+                    $if "notice" in flash:
+                        <div id="flash" class="notice">
+                            <p>$flash["notice"]</p>
+                            <script>$$("#flash").fadeOut(5000);</script>
+                        </div>
+
+<div class="section">
+<div id="nsdetails">
+<table id="nstable">
+<thead>
+<tr>
+    <td nowrap="nowrap"><center><A HREF="/transaction/sortby/dated">Date</A></center></td>
+    <td nowrap="nowrap"><center>Réf.</center></td>
+    <td nowrap="nowrap"><center>Valeur</center></td>
+    <td><center><A HREF="/transaction/sortby/comment">Commentaires</A></center></td>
+    <td nowrap="nowrap"><center><A HREF="/transaction/sortby/categoryID">Catégorie</A></center></td>
+</tr>
+</thead>
+<tbody>
+$for transaction in transactions:
+    <tr class="normal $loop.parity">
+        <td><center>$transaction["dated"]</center></td>
+        <td><center>$transaction["ref1"]</center></td>
+        <td><center>$transaction["value"]</center></td>
+      <td>$transaction["comment"]</td>
+      <td><center>$transaction["category"]</center></td>
+      <td><center><A HREF="/transaction/$transaction["id"]/edit">modifier</A></center></td>
+    </tr>
+
+
+</tbody></table>
+</div>
+</div>
+            </div>
+

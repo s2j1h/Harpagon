@@ -1,0 +1,48 @@
+$def with (transaction,categories,flash)
+
+<div class="bodytext" style="padding:12px;" align="justify">
+    <div class="panel" align="justify">
+    <span class="orangetitle">Modifier la transaction</span>
+                    $if "erreur" in flash:
+                        <div id="flash" class="erreur">
+                            <p>$flash["erreur"]</p>
+                            <script>$$("#flash").fadeOut(5000);</script>
+                        </div>
+                    $if "notice" in flash:
+                        <div id="flash" class="notice">
+                            <p>$flash["notice"]</p>
+                            <script>$$("#flash").fadeOut(5000);</script>
+                        </div>
+                    <form method="POST" enctype="multipart/form-data" action="/transaction/$transaction["id"]/put" class="uniForm">
+                        <fieldset class="inlineLabels">
+                        <div class="ctrlHolder">
+                            <label for="date" class="blockLabel">Date:</label> <input type="text" name="dated" value="$transaction["dated"]" class="textInput" size="10" maxlength="10" disabled />
+                        </div>
+                        <div class="ctrlHolder">
+                            <label for="comment" class="blockLabel">Commentaires:</label> <input type="text" name="comment" value="$transaction["comment"]" class="textInput" size="50" maxlength="50" />
+                        </div>
+                        <div class="ctrlHolder">
+                            <label for="value" class="blockLabel">Valeur:</label> <input type="text" name="value" value="$transaction["value"]" class="textInput" disabled/>
+                        </div>
+                        <div class="ctrlHolder">
+                            <label for="category" class="blockLabel">Catégorie:</label>
+                            <select name="category" class="selectInput">
+                                $ categoryList = categories.items()
+                                $categoryList.sort(key=lambda x: x[1])
+                                $for categoryID,categoryItem in categoryList:
+                                    $if categoryID == transaction['categoryID']:
+                                        $ text="selected='selected'"
+                                    $else:
+                                        $ text=""
+                                    <option value="$categoryID" $text>$categoryItem</option>
+
+                            </select>
+                        </div>
+                        <input type="hidden" name="_method" value="PUT">
+                        <div class="buttonHolder">
+                            <button type="submit" class="submitButton">Modifier</button>
+                        </div>    
+                        </fieldset>
+                    </form>
+    </div>
+</div>

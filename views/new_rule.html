@@ -1,0 +1,66 @@
+$def with (categories,flash)
+
+<script type="text/javascript" src="/static/jquery.validate.js"></script>
+
+<script type="text/javascript">
+    $$(document).ready(function(){
+            $$("#myform").validate({
+            rules: {
+                searchString: "required"
+                },
+            messages: {
+                searchString: "Merci de donner la chaine à rechercher"
+                },
+            errorLabelContainer: "#messageBox",
+            errorClass: "erreur"
+            });         
+    });
+</script>
+
+<div class="bodytext" style="padding:12px;" align="justify">
+    <div class="panel" align="justify">
+    <span class="orangetitle">Ajouter une règle</span>
+                    $if "erreur" in flash:
+                        <div id="flash" class="erreur">
+                            <p>$flash["erreur"]</p>
+                            <script>$$("#flash").fadeOut(5000);</script>
+                        </div>
+                    $if "notice" in flash:
+                        <div id="flash" class="notice">
+                            <p>$flash["notice"]</p>
+                            <script>$$("#flash").fadeOut(5000);</script>
+                        </div>
+
+                    <form method="POST" enctype="multipart/form-data" action="/rule/new" class="uniForm" id="myform">
+                        <div><p id="messageBox" style="font-size: 10px;	text-align: center;	color: #000;margin: 0;"></p></div> 
+
+                        <fieldset class="inlineLabels">
+                        <div class="ctrlHolder">
+                            <label for="searchString" class="blockLabel">Chaine de caractère à rechercher:</label> <input type="text" name="searchString" id="searchString" value="" class="textInput" size="30" maxlength="30" />
+                        </div>
+                        <div class="ctrlHolder">
+                            <label for="category" class="blockLabel">Catégorie à appliquer:</label>
+                            <select name="category" id="class" class="selectInput">
+                                $ categoryList = categories.items()
+                                $categoryList.sort(key=lambda x: x[1])
+                                $for categoryID,categoryItem in categoryList:
+                                    $if categoryID == 1:
+                                        $ text="selected='selected'"
+                                    $else:
+                                        $ text=""
+                                    <option value="$categoryID" $text>$categoryItem</option>
+
+                            </select>
+                        </div>
+
+                        <input type="hidden" name="_method" id="_method" value="POST">
+                        <div class="buttonHolder">
+                            <button type="submit" class="submitButton" name="update" id="update">Créer</button>
+                        </div>    
+                    
+                    
+                    </fieldset>
+
+                    </form>
+    </div>
+</div>

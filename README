@@ -1,0 +1,37 @@
+** Harpagon **
+
+Harpagon est une petite application web permettant d'organiser et visualiser graphiquement ses dépenses - elle est basée sur le framework "web.py":http://webpy.org et sur "Google Chart API":http://code.google.com/intl/fr/apis/chart/.
+
+* FAQ *
+
+-Pourquoi en faire une application web ?
+R: Pour y avoir accès n'importe quand, n'importe où, facilement et simplement
+
+-Est-ce utilisable par tous ?
+R: l'application est très orientée autour de mes propres besoins (1 seule banque BRED pour ne pas la nommer, une gestion simplifiée), pas d'authentification gérée dans l'application...bref utilisable mais cela vous demandera de vous plonger un peu dans le code pour l'adapter à vos besoins.
+
+Pourquoi web.py et pas le framework xxx ?
+R: Keep It Simple ! web.py permet de développer très rapidement et simplement une application web: parfait donc pour des petits projets personnels !
+
+Est ce que l'application respecte l'architecture web "rest":http://fr.wikipedia.org/wiki/Representational_State_Transfer ?
+Oui, du moins j'ai essayé - cf les urls + l'utilisation dans une certaine mesure des actions GET/POST/DELETE/PUT.
+
+* Avertissement *
+
+Le code est sans garantie et sans (trop) de support!
+
+
+
+Copyright 2009 Zeneffy Labs = http://labs.zeneffy.fr - J.Raigneau (julien@raigneau.net)
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
